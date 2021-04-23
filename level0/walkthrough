@@ -1,13 +1,16 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    flag                                               :+:      :+:    :+:    #
+#    walkthrough                                        :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/04/23 19:15:37 by fcadet            #+#    #+#              #
-#    Updated: 2021/04/23 19:15:39 by fcadet           ###   ########.fr        #
+#    Created: 2021/04/23 18:24:24 by fcadet            #+#    #+#              #
+#    Updated: 2021/04/23 19:14:02 by fcadet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-53a4a712787f40ec66c3c26c1f4b164dcad5552b038bb0addd69bf5bf6fa8e77
+- atoi(argv[1]) needs to be equal to 423 in order to enter first if condition
+- execv then runs /bin/sh
+- thanks to the setuid access right we can now access level1 flag
+- cat /home/user/level1/.pass
