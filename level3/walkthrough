@@ -1,0 +1,28 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    walkthrough                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/04/24 14:44:05 by fcadet            #+#    #+#              #
+#    Updated: 2021/04/24 16:01:33 by fcadet           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+- we can exploit printf bad use (no argument list and 1st argument control) by
+using upper stack addresses as a list argument
+- here we want to write value 64 inside global variable m (@ 0x0804988c) in order
+to fulfill the if condition
+
+- str have to include m address at its beginning so we can acces it by going up
+through the stack using $ operator which can select a specific parameter
+in the printf argument list
+- printf will print those 4 bytes and 60 random characters using printf width
+- last instruction in str will put the number of character written so far into
+m using the n qualifier
+
+- printf 1st parameter (str address) is at 16 (4 x 4) bytes from str, address of
+m (at the beginning of str) is the 4th argument in argument list (4$)
+- now we can write this command
+	- (ruby -e 'print "\x8c\x98\x04\x08" + "%60x" + "%4$n"'; cat) > /tmp/exploit
