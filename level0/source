@@ -43,7 +43,7 @@ Dump of assembler code for function main:
 0x08048ec0 <+0>:	push   %ebp								< new stack frame
 0x08048ec1 <+1>:	mov    %esp,%ebp						|
 
-0x08048ec3 <+3>:	and    $0xfffffff0,%esp					< stack alignment
+0x08048ec3 <+3>:	and    $0xfffffff0,%esp					< stack 16 bytes alignment
 
 0x08048ec6 <+6>:	sub    $0x20,%esp						< 32 bytes for new frame
 

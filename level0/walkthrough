@@ -6,11 +6,13 @@
 #    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/23 18:24:24 by fcadet            #+#    #+#              #
-#    Updated: 2021/04/23 19:14:02 by fcadet           ###   ########.fr        #
+#    Updated: 2021/04/24 14:13:41 by fcadet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 - atoi(argv[1]) needs to be equal to 423 in order to enter first if condition
-- execv then runs /bin/sh
+- execv then runs "/bin/sh"
+	- ./level0 423
 - thanks to the setuid access right we can now access level1 flag
-- cat /home/user/level1/.pass
+- inside new shell
+	- cat /home/user/level1/.pass

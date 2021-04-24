@@ -13,9 +13,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int		run(void) {
+void	run(void) {
 	fwrite("Good... Wait what?\n", 1, 19, stdout);
-	return (system("/bin/sh"));
+	system("/bin/sh");
 }
 
 int		main(void) {
@@ -51,7 +51,7 @@ Dump of assembler code for function main:
 0x08048480 <+0>:	push   %ebp							< new stack frame
 0x08048481 <+1>:	mov    %esp,%ebp					|
 
-0x08048483 <+3>:	and    $0xfffffff0,%esp				< stack alignment
+0x08048483 <+3>:	and    $0xfffffff0,%esp				< stack 16 bytes alignment
 
 0x08048486 <+6>:	sub    $0x50,%esp					< 80 bytes for new frame
 
