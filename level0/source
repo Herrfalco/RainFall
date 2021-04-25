@@ -18,9 +18,9 @@
 #include <stdlib.h>
 
 int		main(int argc, char **argv) {
-	gid_t	gid;
-	gid_t	uid;
 	char	*env[2];
+	gid_t	uid;
+	gid_t	gid;
 
 	if (atoi(argv[1]) == 423) {
 		env[0] = strdup("/bin/sh");

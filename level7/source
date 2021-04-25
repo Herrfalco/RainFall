@@ -25,16 +25,16 @@ int		main(int argc, char **argv) {
 	unsigned int	*a;
 	unsigned int	*b;
 
-	a = malloc(8);
-	a[0] = 1;
-	a[1] = (unsigned int)malloc(8);
-
 	b = malloc(8);
-	b[0] = 2;
+	b[0] = 1;
 	b[1] = (unsigned int)malloc(8);
 
-	strcpy((char *)a[1], argv[1]);
-	strcpy((char *)b[1], argv[2]);
+	a = malloc(8);
+	a[0] = 2;
+	a[1] = (unsigned int)malloc(8);
+
+	strcpy((char *)b[1], argv[1]);
+	strcpy((char *)a[1], argv[2]);
 
 	fgets(c, 68, fopen("/home/user/level8/.pass", "r"));
 	puts("~~");
@@ -72,51 +72,51 @@ Dump of assembler code for function main:
 0x0804852a <+9>:	movl   $0x8,(%esp)						< 8 as parameter for malloc
 0x08048531 <+16>:	call   0x80483f0 <malloc@plt>			> malloc
 
-0x08048536 <+21>:	mov    %eax,0x1c(%esp)					< malloc result in a
+0x08048536 <+21>:	mov    %eax,0x1c(%esp)					< malloc result in b
 
-0x0804853a <+25>:	mov    0x1c(%esp),%eax					< 1 in a[0]
+0x0804853a <+25>:	mov    0x1c(%esp),%eax					< 1 in b[0]
 0x0804853e <+29>:	movl   $0x1,(%eax)						|
 
 0x08048544 <+35>:	movl   $0x8,(%esp)						< 8 as parameter for malloc
 0x0804854b <+42>:	call   0x80483f0 <malloc@plt>			> malloc
 
-0x08048550 <+47>:	mov    %eax,%edx						< malloc result in a[1]
+0x08048550 <+47>:	mov    %eax,%edx						< malloc result in b[1]
 0x08048552 <+49>:	mov    0x1c(%esp),%eax					|
 0x08048556 <+53>:	mov    %edx,0x4(%eax)					|
 
 0x08048559 <+56>:	movl   $0x8,(%esp)						< 8 as parameter for malloc
 0x08048560 <+63>:	call   0x80483f0 <malloc@plt>			> malloc
 
-0x08048565 <+68>:	mov    %eax,0x18(%esp)					< malloc result in b
+0x08048565 <+68>:	mov    %eax,0x18(%esp)					< malloc result in a
 
-0x08048569 <+72>:	mov    0x18(%esp),%eax					< 2 in b[0]
+0x08048569 <+72>:	mov    0x18(%esp),%eax					< 2 in a[0]
 0x0804856d <+76>:	movl   $0x2,(%eax)						|
 
 0x08048573 <+82>:	movl   $0x8,(%esp)						< 8 as parameter for malloc
 0x0804857a <+89>:	call   0x80483f0 <malloc@plt>			|
 
-0x0804857f <+94>:	mov    %eax,%edx						< malloc result in b[1]
+0x0804857f <+94>:	mov    %eax,%edx						< malloc result in a[1]
 0x08048581 <+96>:	mov    0x18(%esp),%eax					|
 0x08048585 <+100>:	mov    %edx,0x4(%eax)					|
 
-0x08048588 <+103>:	mov    0xc(%ebp),%eax					< argv[1] and a[1] in registers
+0x08048588 <+103>:	mov    0xc(%ebp),%eax					< argv[1] and b[1] in registers
 0x0804858b <+106>:	add    $0x4,%eax						|
 0x0804858e <+109>:	mov    (%eax),%eax						|
 0x08048590 <+111>:	mov    %eax,%edx						|
 0x08048592 <+113>:	mov    0x1c(%esp),%eax					|
 0x08048596 <+117>:	mov    0x4(%eax),%eax					|
 0x08048599 <+120>:	mov    %edx,0x4(%esp)					< argv[1] as 2nd parameter of strcpy
-0x0804859d <+124>:	mov    %eax,(%esp)						< a[1] as 1st parameter
+0x0804859d <+124>:	mov    %eax,(%esp)						< b[1] as 1st parameter
 0x080485a0 <+127>:	call   0x80483e0 <strcpy@plt>			> strcpy
 
-0x080485a5 <+132>:	mov    0xc(%ebp),%eax					< argv[2] and b[1] in registers
+0x080485a5 <+132>:	mov    0xc(%ebp),%eax					< argv[2] and a[1] in registers
 0x080485a8 <+135>:	add    $0x8,%eax						|
 0x080485ab <+138>:	mov    (%eax),%eax						|
 0x080485ad <+140>:	mov    %eax,%edx						|
 0x080485af <+142>:	mov    0x18(%esp),%eax					|
 0x080485b3 <+146>:	mov    0x4(%eax),%eax					|
 0x080485b6 <+149>:	mov    %edx,0x4(%esp)					< argv[2] as 2nd parameter of strcpy
-0x080485ba <+153>:	mov    %eax,(%esp)						< b[1] as 1st parameter
+0x080485ba <+153>:	mov    %eax,(%esp)						< a[1] as 1st parameter
 0x080485bd <+156>:	call   0x80483e0 <strcpy@plt>			> strcpy
 
 0x080485c2 <+161>:	mov    $0x80486e9,%edx					< "r" and "/home/user/level8/.pass" in registers

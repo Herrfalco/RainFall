@@ -22,8 +22,8 @@ void	m(void) {
 }
 
 int		main(int argc, char **argv) {
-	char	*str;
 	void	(*fn)(void);
+	char	*str;
 
 	str = malloc(64);
 	fn = malloc(4);

