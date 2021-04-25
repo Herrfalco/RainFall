@@ -1,0 +1,27 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    walkthrough                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/04/25 19:33:23 by fcadet            #+#    #+#              #
+#    Updated: 2021/04/25 20:13:03 by fcadet           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+- nb needs to be equal to 0x574f4c46 but also < 10 so we have to overflow str to
+modify its value after the nb > 9 test
+- moreover if nb < 10 there is no chance to overflow str because memcpy just copies
+the nb * 4 (40 max) bytes from argv[2] into it
+- fortunately we can enter a negativ value wich will be cast in a big unsigned one
+(size_t cast) inside memcpy
+
+- we need to write exactly 40 bytes to fill str and 4 bytes to set nb value so we
+can use val_test to find the perfect negative value wich have an unsigned cast
+multiplied by 4 that equals 44
+	- magic value = -2147483637
+
+- so we can write our exploit command
+	- ./bonus1 $(ruby -e 'print "-2147483637 " + "x" * 40 + "\x46\x4c\x4f\x57"')
+	- cat /home/user/bonus2/.pass
