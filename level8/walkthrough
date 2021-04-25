@@ -1,0 +1,29 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    walkthrough                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/04/24 19:00:30 by fcadet            #+#    #+#              #
+#    Updated: 2021/04/25 13:38:42 by fcadet           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+- auth and service are dynacally allocated with malloc in "auth " section
+and strdup in "service" section
+- out goal is to put a value inside auth[32], which is forbidden by the strlen
+<= 30 condition, and to enter the "login" section to execute the system function
+
+- for this reason, we have to enter auth section, in order to allocate 4 bytes
+for auth, and then service section in order to allocate some space for service just
+above the auth memory space
+
+- we can calculate wich offset of service memory space will match the 32nd byte
+of auth
+- as a verification we can find the address of both allocated spaces with ltrace
+	- auth @ 0x0804a008
+	- service @ 0x0804a018
+- finally we can create our exploit command
+	- (ruby -e 'print "auth \nservice" + "x" * (32 - 16) + "\nlogin\n"'; cat) | ./level8
+	- cat /home/user/level9/.pass
