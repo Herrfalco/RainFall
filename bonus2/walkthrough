@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    walkthrough                                        :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/04/25 20:18:52 by fcadet            #+#    #+#              #
-#    Updated: 2021/04/25 22:07:18 by fcadet           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 - up to 40 bytes can be copied from argv[1] to str and 32 bytes from argv[2] can
 be appened to them, so in greetuser, str can contain up to 72 bytes
 

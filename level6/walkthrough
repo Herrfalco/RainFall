@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    walkthrough                                        :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/04/24 17:13:08 by fcadet            #+#    #+#              #
-#    Updated: 2021/04/24 17:48:23 by fcadet           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 - here we want to call n instead of m
 - we can override heap allocated function pointer fn value by overflowing heap
 allocated str (heap grows from low address to high address and fn is allocated

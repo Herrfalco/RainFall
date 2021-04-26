@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    walkthrough                                        :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/04/24 17:50:16 by fcadet            #+#    #+#              #
-#    Updated: 2021/04/25 14:39:06 by fcadet           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 - .pass file content is stored into global variable c
 - we can substitute puts address in GOT by m address in order to print that value
 

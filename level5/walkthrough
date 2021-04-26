@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    walkthrough                                        :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/04/24 16:46:41 by fcadet            #+#    #+#              #
-#    Updated: 2021/04/24 17:11:15 by fcadet           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 - like previous exploit we're going to take advantage printf bad use, but this
 time we will modify the Global Offset Table in order to call function o in place
 of exit

@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    walkthrough                                        :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/04/25 16:47:41 by fcadet            #+#    #+#              #
-#    Updated: 2021/04/25 17:42:08 by fcadet           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 - here we need to overflow str in order to override the main return address
 - we are going to merge s1 and s2 by not putting a '\n' or a '\0' in the 1st 20
 bytes given to stdin

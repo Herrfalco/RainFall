@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    walkthrough                                        :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/04/23 20:07:31 by fcadet            #+#    #+#              #
-#    Updated: 2021/04/24 14:40:53 by fcadet           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 - str can be overflowed, thanks to gets, in order to override p return address
 with function system address
 - using gdb we find that system address @ 0xb7e6b060

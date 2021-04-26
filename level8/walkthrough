@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    walkthrough                                        :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: fcadet <fcadet@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/04/24 19:00:30 by fcadet            #+#    #+#              #
-#    Updated: 2021/04/25 13:38:42 by fcadet           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 - auth and service are dynacally allocated with malloc in "auth " section
 and strdup in "service" section
 - out goal is to put a value inside auth[32], which is forbidden by the strlen
