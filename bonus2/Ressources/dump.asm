@@ -4,7 +4,7 @@ Dump of assembler code for function greetuser:
 
 0x08048487 <+3>:     sub    $0x58,%esp							< 88 bytes on stack
 
-0x0804848a <+6>:     mov    0x8049988,%eax						? language == 1
+0x0804848a <+6>:     mov    0x8049988,%eax						? global variable language == 1
 0x0804848f <+11>:    cmp    $0x1,%eax							|
 0x08048492 <+14>:    je     0x80484ba <greetuser+54>			{
 

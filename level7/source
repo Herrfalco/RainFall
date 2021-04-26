@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-char	c[68];
+char	c[80];
 
 void	m(void) {
 	printf("%s - %d\n", c, (int)time(NULL));
