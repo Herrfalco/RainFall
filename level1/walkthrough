@@ -1,5 +1,5 @@
 - we need to execute run function
-- we can override main return address with run address
+- we can overwrite main return address with run address
 - using gdb we find run address @ 0x08048444
 
 - size of str is 64 bytes

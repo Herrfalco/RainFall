@@ -9,8 +9,8 @@ address and write argv[2] (m address) in it
 
 - thanks to ltrace we find *b[1] @ 0x0804a018 and a[1] @ 0x0804a028 + 0x4
 - so we have to write (0x0804a028 + 0x4 - 0x0804a018) 20 bytes in argv[1] to reach
-a[1] and override it with GOT entry
-- we can then put m address in argv[2] to override the entry
+a[1] and overwrite it with GOT entry
+- we can then put m address in argv[2] to overwrite the entry
 
 - objdump -R shows the GOT entry address of puts @ 0x08049928
 - with gdb we see m @ 0x080484f4

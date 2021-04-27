@@ -1,4 +1,4 @@
-- here we need to overflow str in order to override the main return address
+- here we need to overflow str in order to overwrite the main return address
 - we are going to merge s1 and s2 by not putting a '\n' or a '\0' in the 1st 20
 bytes given to stdin
 - we will in fact give it a full buffer of 4096 bytes ending with a '\n' that

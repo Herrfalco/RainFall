@@ -1,4 +1,4 @@
-- n3 is allocated after n4 so n1->fn can be overrided trough n2->str
+- n3 is allocated after n4 so n1->fn can be overwritten trough n2->str
 
 - thanks to ltrace we can find the offset between those to addresses
 	- n4 @ 0x804a008 & n3 @ 0x804a078

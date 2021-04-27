@@ -1,4 +1,4 @@
-- like previous exploit we need to override m value to fulfil the if condition
+- like previous exploit we need to overwrite m value to fulfil the if condition
 
 - so we have to write 16930116 bytes with printf and access m address stored at
 the beginning of str by using $ flag

@@ -1,5 +1,5 @@
 - here we want to call n instead of m
-- we can override heap allocated function pointer fn value by overflowing heap
+- we can overwrite heap allocated function pointer fn value by overflowing heap
 allocated str (heap grows from low address to high address and fn is allocated
 after str so it has an higher address)
 

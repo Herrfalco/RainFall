@@ -1,4 +1,4 @@
-- str can be overflowed, thanks to gets, in order to override p return address
+- str can be overflowed, thanks to gets, in order to overwrite p return address
 with function system address
 - using gdb we find that system address @ 0xb7e6b060
 
